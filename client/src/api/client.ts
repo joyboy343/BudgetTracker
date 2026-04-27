@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import axios, { AxiosError } from 'axios'
 
 const BASE_URL = import.meta.env.VITE_API_URL ?? '/api/v1'
@@ -25,7 +26,6 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401 && !original._retry) {
       if (isRefreshing) {
-        // Wait for ongoing refresh
         return new Promise((resolve) => {
           refreshQueue.push((token) => {
             if (original.headers) original.headers.Authorization = `Bearer ${token}`
@@ -51,7 +51,6 @@ api.interceptors.response.use(
         localStorage.setItem('access_token',  data.access_token)
         localStorage.setItem('refresh_token', data.refresh_token)
 
-        // Flush queue
         refreshQueue.forEach((cb) => cb(data.access_token))
         refreshQueue = []
 

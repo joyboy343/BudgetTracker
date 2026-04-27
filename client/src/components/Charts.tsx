@@ -20,8 +20,6 @@ const chartFont = { family: "'DM Sans', sans-serif", size: 11 }
 interface MonthlyChartProps { report: MonthlyReport }
 
 export function MonthlyChart({ report }: MonthlyChartProps) {
-  const byCategory = report.by_category.filter(c => c.spent > 0).slice(0, 8)
-
   const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
@@ -38,7 +36,7 @@ export function MonthlyChart({ report }: MonthlyChartProps) {
         bodyColor: '#94a3b8',
         titleFont: { ...chartFont, weight: 'bold' },
         callbacks: {
-          label: (ctx) => ` $${ctx.raw?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+          label: (ctx) => ` $${(ctx.raw as number)?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
         },
       },
     },
@@ -97,7 +95,7 @@ export function CategorySpendChart({ categories }: CategoryChartProps) {
         titleColor: '#f1f5f9',
         bodyColor: '#94a3b8',
         callbacks: {
-          label: (ctx) => ` $${ctx.raw?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+          label: (ctx) => ` $${(ctx.raw as number)?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
         },
       },
     },
@@ -151,7 +149,7 @@ export function TrendChart({ trend }: TrendChartProps) {
         titleColor: '#f1f5f9',
         bodyColor: '#94a3b8',
         callbacks: {
-          label: (ctx) => ` $${ctx.raw?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+          label: (ctx) => ` $${(ctx.raw as number)?.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
         },
       },
     },

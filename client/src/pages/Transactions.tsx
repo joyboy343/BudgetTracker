@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Search, Filter, Trash2, Edit2, Undo2, Upload, Download, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Search, Trash2, Edit2, Undo2, Upload, Download, ChevronLeft, ChevronRight } from 'lucide-react'
 import { getTransactions, deleteTransaction, undoTransactions, importCSV } from '../api/transactions'
 import { exportCSV } from '../api/index'
 import type { Transaction, TransactionPage, Category, TransactionType } from '../types'
@@ -23,7 +23,6 @@ export function Transactions({ categories, onEdit, toast, refreshKey }: Props) {
   const [search,     setSearch]     = useState('')
   const [typeFilter, setTypeFilter] = useState<TransactionType | ''>('')
   const [catFilter,  setCatFilter]  = useState('')
-  const [showFilter, setShowFilter] = useState(false)
   const [deleting,   setDeleting]   = useState<number | null>(null)
 
   const load = useCallback(async () => {

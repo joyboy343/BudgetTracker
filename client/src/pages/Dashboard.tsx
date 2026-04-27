@@ -19,7 +19,7 @@ function fmt(n: number) {
   return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
-export function Dashboard({ categories, onAddTransaction, toast, refreshKey }: Props) {
+export function Dashboard({ categories: _categories, onAddTransaction, toast, refreshKey }: Props) {
   const [selectedMonth, setSelectedMonth] = useState(() => format(new Date(), 'yyyy-MM'))
   const [account,   setAccount]   = useState<Account | null>(null)
   const [report,    setReport]    = useState<MonthlyReport | null>(null)
