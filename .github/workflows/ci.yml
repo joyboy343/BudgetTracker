@@ -86,5 +86,5 @@ jobs:
         run: |
           docker compose up -d server
           sleep 15
-          curl -f http://localhost:8080/health || exit 1
+          curl -f http://localhost:81 || exit 1
           docker compose down
