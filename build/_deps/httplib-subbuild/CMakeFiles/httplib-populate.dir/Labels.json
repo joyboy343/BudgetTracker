@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/httplib-populate"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/94ccd5c834c18172acccd32a42d5dfa2/httplib-populate.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/1581efab041d6653d24145a716fce79c/httplib-populate-complete.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-build.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-configure.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-download.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-install.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-mkdir.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-patch.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-test.rule"
+		},
+		{
+			"file" : "D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/0e4be0c2f074d6c753364c76c96192df/httplib-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"httplib-populate"
+		],
+		"name" : "httplib-populate"
+	}
+}

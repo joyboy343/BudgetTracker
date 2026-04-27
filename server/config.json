@@ -1,0 +1,11 @@
+{
+  "port": 8080,
+  "db_path": "/data/budget.db",
+  "jwt_secret": "CHANGE-ME-use-a-long-random-string-at-least-32-chars",
+  "jwt_expiry_seconds": 900,
+  "refresh_expiry_seconds": 604800,
+  "cors_origin": "http://localhost:5173",
+  "rate_limit_rps": 30,
+  "demo_mode": false,
+  "log_level": "info"
+}

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d9e1582b8d4e463f35b70181848feddd\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0D0B6338-2587-3A97-8BFD-5E3A300EBB2E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,3 @@
+D:/SUT/Projects/budget-app/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.dir
+D:/SUT/Projects/budget-app/build/_deps/catch2-subbuild/CMakeFiles/ALL_BUILD.dir
+D:/SUT/Projects/budget-app/build/_deps/catch2-subbuild/CMakeFiles/ZERO_CHECK.dir

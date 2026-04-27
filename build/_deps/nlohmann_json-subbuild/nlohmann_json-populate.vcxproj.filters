@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d7aac443ea22961001e4cdc30e3e7ec5\nlohmann_json-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\06dba17d8bbbe699e94f8e4e943c9532\nlohmann_json-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\d9e1582b8d4e463f35b70181848feddd\nlohmann_json-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\SUT\Projects\budget-app\build\_deps\nlohmann_json-subbuild\CMakeFiles\nlohmann_json-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0D0B6338-2587-3A97-8BFD-5E3A300EBB2E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

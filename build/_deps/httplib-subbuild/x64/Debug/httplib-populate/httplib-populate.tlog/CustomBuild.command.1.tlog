@@ -1,0 +1,150 @@
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/tmp/httplib-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-DOWNLOAD.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/tmp/httplib-populate-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-UPDATE.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps\httplib-src
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -Dcan_fetch=YES -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/tmp/httplib-populate-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-CONFIGURE.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps\httplib-build
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-BUILD.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps\httplib-build
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-INSTALL.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps\httplib-build
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\0E4BE0C2F074D6C753364C76C96192DF\HTTPLIB-POPULATE-TEST.RULE
+setlocal
+cd D:\SUT\Projects\budget-app\build\_deps\httplib-build
+if %errorlevel% neq 0 goto :cmEnd
+D:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\1581EFAB041D6653D24145A716FCE79C\HTTPLIB-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/Debug/httplib-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/Debug/httplib-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKEFILES\94CCD5C834C18172ACCCD32A42D5DFA2\HTTPLIB-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\HTTPLIB-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/SUT/Projects/budget-app/build/_deps/httplib-subbuild -BD:/SUT/Projects/budget-app/build/_deps/httplib-subbuild --check-stamp-file D:/SUT/Projects/budget-app/build/_deps/httplib-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

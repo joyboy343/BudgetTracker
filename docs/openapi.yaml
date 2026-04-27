@@ -1,0 +1,520 @@
+openapi: 3.0.3
+info:
+  title: Ledger Budget API
+  description: |
+    C++ REST API for the Ledger personal finance application.
+    All endpoints (except auth) require a Bearer JWT access token.
+  version: 1.0.0
+  contact:
+    name: Ledger API
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:   { type: string }
+        code:    { type: integer }
+        details: { type: object }
+
+    AuthTokens:
+      type: object
+      properties:
+        user_id:       { type: integer }
+        email:         { type: string }
+        access_token:  { type: string }
+        refresh_token: { type: string }
+        expires_in:    { type: integer }
+
+    Category:
+      type: object
+      properties:
+        id:      { type: integer }
+        user_id: { type: integer, nullable: true }
+        name:    { type: string }
+        color:   { type: string, example: '#ef4444' }
+        icon:    { type: string, example: 'utensils' }
+
+    Transaction:
+      type: object
+      properties:
+        id:             { type: integer }
+        date:           { type: string, format: date }
+        amount:         { type: number, format: double }
+        type:           { type: string, enum: [expense, income] }
+        category_id:    { type: integer, nullable: true }
+        category_name:  { type: string }
+        category_color: { type: string }
+        note:           { type: string }
+        recurring:      { type: boolean }
+        created_at:     { type: string, format: date-time }
+
+    TransactionPage:
+      type: object
+      properties:
+        items: { type: array, items: { $ref: '#/components/schemas/Transaction' } }
+        total: { type: integer }
+        page:  { type: integer }
+        size:  { type: integer }
+        pages: { type: integer }
+
+    Budget:
+      type: object
+      properties:
+        id:             { type: integer }
+        year_month:     { type: string, example: '2026-03' }
+        category_id:    { type: integer }
+        category_name:  { type: string }
+        category_color: { type: string }
+        amount:         { type: number }
+
+    CategorySummary:
+      type: object
+      properties:
+        category_id: { type: integer }
+        category:    { type: string }
+        color:       { type: string }
+        budget:      { type: number }
+        spent:       { type: number }
+        income:      { type: number }
+        status:      { type: string, enum: [ok, over, no_budget] }
+        over_by:     { type: number }
+        remaining:   { type: number }
+
+    MonthlyReport:
+      type: object
+      properties:
+        year_month:     { type: string }
+        total_income:   { type: number }
+        total_expense:  { type: number }
+        net_change:     { type: number }
+        ending_balance: { type: number }
+        by_category:    { type: array, items: { $ref: '#/components/schemas/CategorySummary' } }
+        top_expenses:   { type: array, items: { $ref: '#/components/schemas/Transaction' } }
+
+    MonthlyTrend:
+      type: object
+      properties:
+        year_month: { type: string }
+        income:     { type: number }
+        expense:    { type: number }
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:    { type: string, format: email }
+                password: { type: string, minLength: 8 }
+      responses:
+        '201': { description: Created, content: { application/json: { schema: { $ref: '#/components/schemas/AuthTokens' } } } }
+        '400': { description: Validation error }
+        '409': { description: Email already exists }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:    { type: string }
+                password: { type: string }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/AuthTokens' } } } }
+        '401': { description: Invalid credentials }
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Refresh access token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token: { type: string }
+      responses:
+        '200': { description: New tokens }
+        '401': { description: Invalid refresh token }
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get current user info
+      responses:
+        '200': { description: User info }
+        '401': { description: Unauthorized }
+
+  /account:
+    get:
+      tags: [Account]
+      summary: Get current balance
+      responses:
+        '200':
+          description: Balance
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance: { type: number }
+
+  /account/fund:
+    post:
+      tags: [Account]
+      summary: Add funds (income transaction)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount: { type: number, minimum: 0.01 }
+                note:   { type: string }
+      responses:
+        '200': { description: Updated balance }
+
+  /categories:
+    get:
+      tags: [Categories]
+      summary: List all categories
+      responses:
+        '200':
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Category' }
+    post:
+      tags: [Categories]
+      summary: Create a category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:  { type: string, maxLength: 64 }
+                color: { type: string }
+                icon:  { type: string }
+      responses:
+        '201': { description: Created category }
+        '409': { description: Name already exists }
+
+  /categories/{id}:
+    put:
+      tags: [Categories]
+      summary: Rename/update a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:  { type: string }
+                color: { type: string }
+                icon:  { type: string }
+      responses:
+        '200': { description: Updated category }
+        '404': { description: Not found }
+    delete:
+      tags: [Categories]
+      summary: Delete a category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+
+  /transactions:
+    get:
+      tags: [Transactions]
+      summary: List transactions with optional filters
+      parameters:
+        - name: start
+          in: query
+          schema: { type: string, format: date }
+        - name: end
+          in: query
+          schema: { type: string, format: date }
+        - name: category
+          in: query
+          schema: { type: integer }
+        - name: type
+          in: query
+          schema: { type: string, enum: [expense, income] }
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 50, maximum: 200 }
+      responses:
+        '200':
+          description: Paginated transaction list
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/TransactionPage' }
+    post:
+      tags: [Transactions]
+      summary: Create a transaction
+      parameters:
+        - name: force
+          in: query
+          description: Allow negative balance
+          schema: { type: boolean }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [date, amount, type]
+              properties:
+                date:        { type: string, format: date }
+                amount:      { type: number, minimum: 0.01 }
+                type:        { type: string, enum: [expense, income] }
+                category_id: { type: integer, nullable: true }
+                note:        { type: string }
+                recurring:   { type: boolean }
+      responses:
+        '201': { description: Created transaction }
+        '400': { description: Validation error }
+        '409': { description: Insufficient balance (use force=true to override) }
+
+  /transactions/{id}:
+    put:
+      tags: [Transactions]
+      summary: Update a transaction
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:        { type: string, format: date }
+                amount:      { type: number }
+                type:        { type: string, enum: [expense, income] }
+                category_id: { type: integer, nullable: true }
+                note:        { type: string }
+                recurring:   { type: boolean }
+      responses:
+        '200': { description: Updated transaction }
+        '404': { description: Not found }
+    delete:
+      tags: [Transactions]
+      summary: Delete a transaction
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+
+  /transactions/undo:
+    post:
+      tags: [Transactions]
+      summary: Undo last N transactions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                last_n: { type: integer, minimum: 1, maximum: 50, default: 1 }
+      responses:
+        '200':
+          description: Removed IDs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  removed_ids: { type: array, items: { type: integer } }
+                  count:       { type: integer }
+
+  /transactions/import:
+    post:
+      tags: [Transactions]
+      summary: Import transactions from CSV
+      requestBody:
+        required: true
+        content:
+          text/csv:
+            schema:
+              type: string
+              description: "CSV with header: date,amount,type,category,note"
+      responses:
+        '200':
+          description: Import result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  imported: { type: integer }
+                  skipped:  { type: integer }
+                  errors:   { type: array, items: { type: string } }
+
+  /budgets:
+    get:
+      tags: [Budgets]
+      summary: List budgets for a month
+      parameters:
+        - name: year_month
+          in: query
+          schema: { type: string, example: '2026-03' }
+      responses:
+        '200':
+          description: Budget list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Budget' }
+    post:
+      tags: [Budgets]
+      summary: Create or update (upsert) a budget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [year_month, category_id, amount]
+              properties:
+                year_month:  { type: string, example: '2026-03' }
+                category_id: { type: integer }
+                amount:      { type: number, minimum: 0.01 }
+      responses:
+        '201': { description: Saved budget }
+
+  /budgets/{id}:
+    delete:
+      tags: [Budgets]
+      summary: Delete a budget
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        '200': { description: Deleted }
+        '404': { description: Not found }
+
+  /reports/monthly:
+    get:
+      tags: [Reports]
+      summary: Monthly summary report
+      parameters:
+        - name: year_month
+          in: query
+          schema: { type: string, example: '2026-03' }
+      responses:
+        '200':
+          description: Monthly report
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MonthlyReport' }
+
+  /reports/trend:
+    get:
+      tags: [Reports]
+      summary: Multi-month income/expense trend
+      parameters:
+        - name: months
+          in: query
+          schema: { type: integer, default: 6, maximum: 24 }
+      responses:
+        '200':
+          description: Trend data
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/MonthlyTrend' }
+
+  /reports/export:
+    get:
+      tags: [Reports]
+      summary: Export transactions as CSV
+      parameters:
+        - name: year_month
+          in: query
+          schema: { type: string }
+        - name: format
+          in: query
+          schema: { type: string, enum: [csv], default: csv }
+      responses:
+        '200':
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  /health:
+    get:
+      tags: [System]
+      summary: Health check
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: ok }

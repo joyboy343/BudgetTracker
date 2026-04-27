@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sidebar-w: 240px;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    @apply bg-surface-950 text-slate-100;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar        { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb  { @apply bg-slate-700 rounded-full; }
+}
+
+@layer components {
+  /* Card */
+  .card {
+    @apply bg-surface-900 border border-slate-800 rounded-2xl p-6;
+  }
+
+  .card-sm {
+    @apply bg-surface-900 border border-slate-800 rounded-xl p-4;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full bg-surface-800 border border-slate-700 rounded-xl px-4 py-2.5
+           text-slate-100 placeholder-slate-500 text-sm
+           focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30
+           transition-colors duration-150;
+  }
+
+  .select {
+    @apply input appearance-none cursor-pointer;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium
+           transition-all duration-150 cursor-pointer select-none
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-950;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-600
+           focus:ring-brand-500/50 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-slate-400 hover:text-slate-100 hover:bg-slate-800
+           focus:ring-slate-600;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500/10 text-red-400 hover:bg-red-500/20 focus:ring-red-500/30;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* Amount display */
+  .amount {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Stat label */
+  .stat-label {
+    @apply text-xs font-medium text-slate-500 uppercase tracking-wider;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply bg-slate-800 rounded-lg animate-pulse;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-1.5 rounded-full bg-slate-800 overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+  }
+}
+
+/* Overlay backdrop */
+.backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* Number transition */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

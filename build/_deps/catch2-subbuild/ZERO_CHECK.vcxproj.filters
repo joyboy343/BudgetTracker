@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\SUT\Projects\budget-app\build\_deps\catch2-subbuild\CMakeFiles\687d522883e92055db1aa7aa2b6e8287\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D1DA04FE-18B0-3D16-AB9E-C95740E952D4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

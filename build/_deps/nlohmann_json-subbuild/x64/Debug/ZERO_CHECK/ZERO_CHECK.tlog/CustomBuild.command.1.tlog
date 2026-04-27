@@ -1,0 +1,10 @@
+^D:\SUT\PROJECTS\BUDGET-APP\BUILD\_DEPS\NLOHMANN_JSON-SUBBUILD\CMAKEFILES\D9E1582B8D4E463F35B70181848FEDDD\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/SUT/Projects/budget-app/build/_deps/nlohmann_json-subbuild -BD:/SUT/Projects/budget-app/build/_deps/nlohmann_json-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/SUT/Projects/budget-app/build/_deps/nlohmann_json-subbuild/nlohmann_json-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

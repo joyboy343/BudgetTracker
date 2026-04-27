@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── C++ Backend ─────────────────────────────────────────────────────────────
+  backend:
+    name: C++ Build & Tests
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake git \
+            libsqlite3-dev libssl-dev zlib1g-dev
+
+      - name: Cache CMake build
+        uses: actions/cache@v4
+        with:
+          path: server/build
+          key: ${{ runner.os }}-cmake-${{ hashFiles('server/CMakeLists.txt') }}
+          restore-keys: ${{ runner.os }}-cmake-
+
+      - name: Configure
+        working-directory: server
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build
+        working-directory: server
+        run: cmake --build build --parallel 4
+
+      - name: Run tests
+        working-directory: server/build
+        run: ctest --output-on-failure -V
+
+  # ── Frontend ─────────────────────────────────────────────────────────────────
+  frontend:
+    name: React Build & Lint
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Type check
+        working-directory: client
+        run: npm run typecheck
+
+      - name: Build
+        working-directory: client
+        run: npm run build
+        env:
+          VITE_API_URL: /api/v1
+
+  # ── Docker build check ────────────────────────────────────────────────────
+  docker:
+    name: Docker Compose Build
+    runs-on: ubuntu-24.04
+    needs: [backend, frontend]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build images
+        run: docker compose build
+
+      - name: Smoke test
+        run: |
+          docker compose up -d server
+          sleep 15
+          curl -f http://localhost:8080/health || exit 1
+          docker compose down

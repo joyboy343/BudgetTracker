@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: docker/Dockerfile
+    container_name: budget_server_v1
+    restart: unless-stopped
+    volumes:
+      - db_data_v1:/data
+    environment:
+      - TZ=UTC
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - budget_net_v1
+  client:
+    build:
+      context: ./client
+      dockerfile: docker/Dockerfile
+    container_name: budget_client_v1
+    restart: unless-stopped
+    ports:
+      - "81:80"
+    depends_on:
+      server:
+        condition: service_started
+    networks:
+      - budget_net_v1
+  seed:
+    build:
+      context: ./server
+      dockerfile: docker/Dockerfile
+    container_name: budget_seed_v1
+    volumes:
+      - db_data_v1:/data
+    entrypoint: ["sh", "-c", "sqlite3 /data/budget.db < /app/seed_data.sql && echo 'Seeded OK'"]
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - budget_net_v1
+    profiles:
+      - seed
+volumes:
+  db_data_v1:
+    driver: local
+networks:
+  budget_net_v1:
+    driver: bridge
